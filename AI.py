@@ -6,7 +6,7 @@ import time  # NEW: Needed for the delay
 import os    # NEW: Needed to check if the file exists
 
 fake = Faker()
-file_name = "D://Python//28.py//Mashreq//Mashreq_SignIn_Data.xlsx"
+file_name = "D://Python//28.py//BANK//BANK_SignIn_Data.xlsx"
 
 def generate_single_log():
     """Generates exactly one new sign-in attempt."""
@@ -64,3 +64,4 @@ def main():
         except Exception as e:
             print(f"Error Occurred: Retrying in 5 seconds... {e}")
             time.sleep(5)  # Wait before retrying in case of error
+
