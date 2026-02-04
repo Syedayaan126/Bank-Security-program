@@ -7,7 +7,7 @@ import AI  # Ensure AI.py is in the same folder
 
 # --- 1. INITIALIZE ROOT WINDOW ---
 root = tk.Tk()
-root.title("Mashreq | AI Sign-In Security Monitor")
+root.title("BANK| AI Sign-In Security Monitor")
 root.state('zoomed') # Full screen mode
 
 # --- BRANDING COLORS ---
@@ -206,5 +206,6 @@ tk.Button(button_frame, text="Refresh Data", command=load_excel,bg="#7F8C8D", fg
 # --- START APPLICATION ---
 threading.Thread(target=run_in_background, daemon=True).start()
 load_excel()
+
 
 root.mainloop()
