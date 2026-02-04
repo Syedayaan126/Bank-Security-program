@@ -11,21 +11,21 @@ root.title("BANK| AI Sign-In Security Monitor")
 root.state('zoomed') # Full screen mode
 
 # --- BRANDING COLORS ---
-MASHREQ_ORANGE = "#FF5E00"
-MASHREQ_DARK = "#1D252D"
-MASHREQ_BG = "#FFFFFF" 
-MASHREQ_WHITE = "#FFFFFF"
-MASHREQ_STRIPE = "#F2F4F4"
+BANK_ORANGE = "#FF5E00"
+BANK_DARK = "#1D252D"
+BANK_BG = "#FFFFFF" 
+BANK_WHITE = "#FFFFFF"
+BANK_STRIPE = "#F2F4F4"
 HIGH_RISK_RED = "#FFD1D1"
 
 # --- 2. CONFIGURE STYLES ---
 style = ttk.Style()
 style.theme_use("clam")
-style.configure("Treeview", background=MASHREQ_WHITE, fieldbackground=MASHREQ_WHITE,foreground="black", rowheight=35, font=("Segoe UI", 10))
-style.configure("Treeview.Heading", background=MASHREQ_DARK, foreground="white",font=("Segoe UI", 10, "bold"))
-style.map("Treeview", background=[('selected', MASHREQ_ORANGE)])
+style.configure("Treeview", background=BANK_WHITE, fieldbackground=BANK_WHITE,foreground="black", rowheight=35, font=("Segoe UI", 10))
+style.configure("Treeview.Heading", background=BANK_DARK, foreground="white",font=("Segoe UI", 10, "bold"))
+style.map("Treeview", background=[('selected', BANK_ORANGE)])
 
-root.configure(bg=MASHREQ_BG)
+root.configure(bg=BANK_BG)
 
 # --- GLOBAL VARIABLES ---
 current_page = 0
@@ -62,7 +62,7 @@ def clear_search():
 def load_excel():
     """Reads Excel, filters by search, sorts, and populates table."""
     global current_page
-    file_path = "D://Python//28.py//Mashreq//Mashreq_SignIn_Data.xlsx"
+    file_path = "D://Python//28.py//BANK//BANK_SignIn_Data.xlsx" # CHANGE THE FILE PATH
     
     df = None
     for i in range(5):
@@ -120,8 +120,8 @@ def load_excel():
             tree.insert("", "end", values=list(row), tags=(tag,))
 
         tree.tag_configure("danger", background=HIGH_RISK_RED, foreground="black")
-        tree.tag_configure("even", background=MASHREQ_STRIPE)
-        tree.tag_configure("odd", background=MASHREQ_WHITE)
+        tree.tag_configure("even", background=BANK_STRIPE)
+        tree.tag_configure("odd", background=BANK_WHITE)
 
     except Exception as e:
         messagebox.showerror("Error", f"Load Failed: {e}")
@@ -145,38 +145,38 @@ def mark_as_contacted():
 # --- UI LAYOUT ---
 
 # 1. Header Section
-header_frame = tk.Frame(root, bg=MASHREQ_DARK, height=80)
+header_frame = tk.Frame(root, bg=BANK_DARK, height=80)
 header_frame.pack(fill="x")
 
 # Title (Left)
-title_label = tk.Label(header_frame, text="MASHREQ SECURITY DASHBOARD",font=("Arial Black", 18), fg=MASHREQ_ORANGE, bg=MASHREQ_DARK)
+title_label = tk.Label(header_frame, text="BANK SECURITY DASHBOARD",font=("Arial Black", 18), fg=BANK_ORANGE, bg=BANK_DARK)
 title_label.pack(pady=20, padx=30, side="left")
 
 # --- NEW: SEARCH BAR (Right) ---
 # We use a sub-frame to group the Entry and Buttons together
-search_frame = tk.Frame(header_frame, bg=MASHREQ_DARK)
+search_frame = tk.Frame(header_frame, bg=BANK_DARK)
 search_frame.pack(side="right", padx=20, pady=20)
 
-tk.Label(search_frame, text="Search User:", fg="white", bg=MASHREQ_DARK, font=("Segoe UI", 10)).pack(side="left", padx=5)
+tk.Label(search_frame, text="Search User:", fg="white", bg=BANK_DARK, font=("Segoe UI", 10)).pack(side="left", padx=5)
 
 search_entry = tk.Entry(search_frame, width=25, font=("Segoe UI", 10))
 search_entry.pack(side="left", padx=5)
 # Bind the "Enter" key to perform search
 search_entry.bind('<Return>', lambda event: perform_search())
 
-btn_search = tk.Button(search_frame, text="🔍 Search", command=perform_search,bg=MASHREQ_ORANGE, fg="white", relief="flat", font=("Segoe UI", 9, "bold"))
+btn_search = tk.Button(search_frame, text="🔍 Search", command=perform_search,bg=BANK_ORANGE, fg="white", relief="flat", font=("Segoe UI", 9, "bold"))
 btn_search.pack(side="left", padx=5)
 
 btn_clear = tk.Button(search_frame, text="✖", command=clear_search,bg="#7F8C8D", fg="white", relief="flat", font=("Segoe UI", 9, "bold"))
 btn_clear.pack(side="left", padx=2)
 
 # Status Label (Now next to search)
-status_label = tk.Label(header_frame, text="Initializing...",font=("Segoe UI", 10, "italic"), fg="#AAAAAA", bg=MASHREQ_DARK)
+status_label = tk.Label(header_frame, text="Initializing...",font=("Segoe UI", 10, "italic"), fg="#AAAAAA", bg=BANK_DARK)
 status_label.pack(side="right", padx=10)
 
 
 # 2. Main Table Section
-content_frame = tk.Frame(root, bg=MASHREQ_BG)
+content_frame = tk.Frame(root, bg=BANK_BG)
 content_frame.pack(fill="both", expand=True, padx=30, pady=20)
 
 tree_frame = tk.Frame(content_frame)
@@ -195,11 +195,11 @@ button_frame.pack(fill="x", pady=20)
 
 btn_style = {"font": ("Segoe UI", 10, "bold"), "relief": "flat", "padx": 20, "pady": 8}
 
-tk.Button(button_frame, text="Previous",command=lambda: [globals().update(current_page=max(0, current_page-1)), load_excel()], bg=MASHREQ_DARK, fg="white", **btn_style).pack(side="left", padx=30)
+tk.Button(button_frame, text="Previous",command=lambda: [globals().update(current_page=max(0, current_page-1)), load_excel()], bg=BANK_DARK, fg="white", **btn_style).pack(side="left", padx=30)
 
-tk.Button(button_frame, text="Next Page",command=lambda: [globals().update(current_page=current_page+1), load_excel()],bg=MASHREQ_DARK, fg="white", **btn_style).pack(side="left")
+tk.Button(button_frame, text="Next Page",command=lambda: [globals().update(current_page=current_page+1), load_excel()],bg=BANK_DARK, fg="white", **btn_style).pack(side="left")
 
-tk.Button(button_frame, text="✅ MARK AS CONTACTED", command=mark_as_contacted, bg=MASHREQ_ORANGE, fg="white", **btn_style).pack(side="right", padx=30)
+tk.Button(button_frame, text="✅ MARK AS CONTACTED", command=mark_as_contacted, bg=BANK_ORANGE, fg="white", **btn_style).pack(side="right", padx=30)
 
 tk.Button(button_frame, text="Refresh Data", command=load_excel,bg="#7F8C8D", fg="white", **btn_style).pack(side="right")
 
@@ -209,3 +209,4 @@ load_excel()
 
 
 root.mainloop()
+
